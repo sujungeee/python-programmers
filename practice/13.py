@@ -17,11 +17,8 @@ def solution(board, moves):
         if stack[i-1]:
             new= stack[i-1].pop()
             blanket.append(new)
-        # 연속으로 같은 인형이 들어온 경우, 단 blanket에 2개는 있어야 연속된 값을 삭제할 수 있다.
         if len(blanket)>=2 and blanket[-2]==new:
             blanket.pop()
             blanket.pop()
             answer+=2
     return answer
-
-print(solution([[0,0,0,0,0],[0,0,1,0,3],[0,2,5,0,1],[4,2,4,4,2],[3,5,1,3,1]], [1,5,3,5,1,2,1,4]))
