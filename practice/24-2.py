@@ -1,3 +1,5 @@
+# 교재 코드
+# 뭔가 굉장히 비효율적인 것 같다
 def solution(id_list, report, k):
     answer= []
     dic= {}
