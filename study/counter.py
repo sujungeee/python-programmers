@@ -1,14 +1,15 @@
 from itertools import combinations
 from collections import Counter
 
-orders= ["XYZ", "XWY", "WXA"]
-courses= [2,3,4]
+orders= ["BACGF", "AC", "CDE", "ACDE", "BCFG", "ACDEH"]
+course= 2
 
-for course in courses:
-    menu= []
+menu= []
 
-    for order in orders:
-        menu+= combinations(sorted(order), course)
+for order in orders:
+    menu+= combinations(sorted(order), course)
 
-    counter = Counter(menu).most_common()
-    print(counter)
+counter= Counter(menu)
+print('그냥 counter: ', counter)
+counter = Counter(menu).most_common()
+print('most counter: ', counter)

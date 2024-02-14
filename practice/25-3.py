@@ -13,10 +13,10 @@ def solution(orders, course):
 
         for order in orders:
             menu += combinations(sorted(order),num)
-        counter= Counter(menu)
+        counter= Counter(menu).most_common()
 
-        for key, value in counter.items():
-            if (value >= 2) and (value == counter.most_common()[0][1]):
+        for key, value in counter:
+            if (value >= 2) and (value == counter[0][1]):
                 answer.append("".join(key))
 
     return sorted(answer)
