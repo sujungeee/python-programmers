@@ -8,12 +8,13 @@ def find(parent, i):
 
 def solution(n, costs):
     answer= 0 # 최소 비용
-    edges= sorted([ (x[2], x[0], x[1]) for x in costs]) # cost, x, y
+    # edges= sorted([ (x[2], x[0], x[1]) for x in costs]) # cost, x, y
+    costs.sort(key= lambda x: x[2])
     parent= list(range(n))
 
     bridges= 0 # 다리 개수
 
-    for cost,x,y in edges:
+    for x,y,cost in costs:
         # 두 집합이 다르면 union!! 여기서 집합 더하기(따로 함수 안빼고)
         if find(parent, x) != find(parent, y):
             answer+= cost
