@@ -16,3 +16,13 @@ def solution(phone_book):
 print(solution(["119", "97674223", "1195524421"]))
 print(solution(["123","456","789"]))
 print(solution(["12","123","1235","567","88"]))
+
+print('---배열---')
+arr1= ['1913789', '1342']
+tmp= '789'
+for i in arr1:
+    if tmp in i:
+        print('in!!', tmp, i)
+
+print('---startswith---')
+print('1195'.startswith('119')) # True
