@@ -1,4 +1,4 @@
-# 교쟈
+# 교재
 def solution(phone_book):
     phone_book.sort()
 
