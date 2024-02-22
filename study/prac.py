@@ -7,7 +7,7 @@ print(dq) # deque([1, 2])
 dq.remove(1)
 print(dq) # deque([2])
 dq.append(1)
-print(dq) # deque([2, 1])
+print(dq) # deque([2, 1]) # 2(먼저) -> 1(나중)
 print(dq.popleft()) # 2
 print(dq) # deque([1])
 
