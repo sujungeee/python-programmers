@@ -1,4 +1,5 @@
 # 참고 코드
+# https://coding-archive31.tistory.com/71
 
 from collections import deque
 def solution(board):
