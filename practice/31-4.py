@@ -13,13 +13,14 @@ def solution(info, edges):
         now, can_move, sheep, wolf = q.popleft()
         if answer < sheep:
             answer = sheep
-        for i, node in enumerate(can_move):
+        for i, node in enumerate(can_move): # node는 이미 now의 자식 노드임
             if info[node] == 1: # 늑대면
                 if sheep > wolf + 1:
                     q.append([node, can_move[:i] + can_move[i + 1:] + tree[node], sheep, wolf + 1])
             else: # 양이면
                 q.append([node, can_move[:i] + can_move[i + 1:] + tree[node], sheep + 1, wolf])
-            # can_move[:i] + can_move[i + 1:] + tree[node]: 부모 노드 중에서 현재 노드를 제외하고,현재 노드의 자식을 추가
+            # can_move: now에서 움직일 수 있는, 즉 now의 자식 노드(최대 2)를 의미함(node)
+            # can_move[:i] + can_move[i + 1:] + tree[node]: 자식 노드들 중에서 현재 자식 노드를 제외하고, 현재 노드의 자식을 추가(자식의 자식을 추가)
 
     return answer
 
