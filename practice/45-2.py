@@ -1,47 +1,33 @@
-# 교재: 틀린 답......ㅋ 기각!!
+# 참고 코드(2)
+# https://velog.io/@isayaksh/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-Programmers-%EA%B2%BD%EC%A3%BC%EB%A1%9C-%EA%B1%B4%EC%84%A4-Python
+from heapq import heappop, heappush
 
 def solution(board):
-
-    def is_valid(x,y):
-        return 0<=x<N and 0<=y<N
-
-    def is_blocked(x,y): # 이동 불가능하면 true
-        return (x,y) == (0,0) or not is_valid(x,y) or board[x][y]==1
-
-    def calculate_cost(direction, prev_direction, cost):
-        if prev_direction == -1 or (prev_direction-direction)%2==0: # 직선 거리
-            return cost + 100
-        else: # 코너
-            return cost + 600
-
-    def isSouldUpdate(x, y, direction, new_cost):
-        return visited[x][y][direction]==0 or visited[x][y][direction]>new_cost
-
-    queue=[(0,0,-1,0)]
     N= len(board)
-    directions= [(0,-1),(0,1),(1,0),(-1,0)]
-    visited= [[[0 for _ in range(4)] for _ in range(N)] for _ in range(N)]
-    answer= float('inf')
+    costBoard= [[[float('inf')]* N for _ in range(N)] for _ in range(4)]
+    for i in range(4):
+        costBoard[i][0][0]= 0
 
-    while queue:
-        x, y, prev_direction, cost= queue.pop(0)
+    heap= [(0,0,0,0), (0,0,0,2)] # 이동 비용, 출발 지점(x,y), 현재 방향
 
-        for direction, (dx,dy) in enumerate(directions):
-            new_x= x+dx
-            new_y= y+dy
+    while heap:
+        cost, x, y, d= heappop(heap)
 
-            if is_blocked(new_x, new_y):
+        for dx, dy, dd in ((1,0,0), (-1,0,1), (0,1,2), (0,-1,3)):
+            nx, ny= x+dx, y+dy
+
+            # 이동 좌표가 1. 벽 2. 좌표 밖 이면 pass
+            if nx<0 or nx>=N or ny<0 or ny>=N or board[ny][nx]:
                 continue
 
-            new_cost= calculate_cost(direction, prev_direction, cost)
+            newCost= cost+ (100 if d==dd else 600)
 
-            if (new_x, new_y) == (N-1, N-1):
-                answer= min(answer, new_cost)
-            elif isSouldUpdate(new_x, new_y, direction, new_cost):
-                queue.append((new_x, new_y, direction, new_cost))
-                visited[new_x][new_y][direction]= new_cost
+            if costBoard[dd][ny][nx]>newCost:
+                costBoard[dd][ny][nx]= newCost
+                heappush(heap, (newCost, nx, ny, dd))
 
-    return answer
+    return min(costBoard[0][N-1][N-1], costBoard[1][N-1][N-1], costBoard[2][N-1][N-1], costBoard[3][N-1][N-1])
+
 
 print(solution([[0,0,0],[0,0,0],[0,0,0]]))
 print(solution([[0,0,0,0,0,0,0,1],[0,0,0,0,0,0,0,0],[0,0,0,0,0,1,0,0],[0,0,0,0,1,0,0,0],[0,0,0,1,0,0,0,1],[0,0,1,0,0,0,1,0],[0,1,0,0,0,1,0,0],[1,0,0,0,0,0,0,0]]))
