@@ -5,6 +5,7 @@ def solution(n, computers):
     cnt= 0
     visited= set()
 
+    # 모든 컴퓨터가 상호 연결되어 있으므로 굳이 두 번 graph append할 필요 X
     graph= {i: [] for i in range(n)}
     for idx1, computer in enumerate(computers):
         for idx2, com in enumerate(computer):
